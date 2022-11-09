@@ -279,3 +279,7 @@ src/mod/*/*/test/[0-9]*/*
 test-suite.log
 src/mod/applications/mod_av/test/test_BT7.mp4
 src/mod/applications/mod_av/test/test_RGB.mp4
+
+
+/src/out/build/x64-Debug
+/libs
