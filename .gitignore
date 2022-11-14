@@ -283,3 +283,5 @@ src/mod/applications/mod_av/test/test_RGB.mp4
 
 /src/out/build/x64-Debug
 /libs
+/out/build/x64-Debug
+/src/mod/endpoints/mod_rtmp/libamf/out
