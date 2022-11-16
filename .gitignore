@@ -287,3 +287,5 @@ src/mod/endpoints/mod_sofia/test/sipp-based-tests
 /libs
 /out/build/x64-Debug
 /src/mod/endpoints/mod_rtmp/libamf/out
+/.vscode
+*.vcxproj
