@@ -1,9 +1,16 @@
-<configuration name="hellowrold.conf" description="HelloWorld">
+<configuration name="helloworld.conf" description="HelloWorld">
   <settings>
     <!--<param name="odbc-dsn" value="dsn:user:pass"/>-->
     <!--<param name="dbname" value="/dev/shm/callcenter.db"/>-->
     <!--<param name="reserve-agents" value="true"/>-->
     <!--<param name="cc-instance-id" value="single_box"/>-->
+
+	  <param name="db-hostname" value="192.168.1.1"/>
+	  <param name="db-name" value="jack"/>
+	  <param name="db-user" value="tome"/>
+	  <param name="db-password" value="65s4d836sdwerf"/>
+	  <param name="db-port" value="1002"/>
+
   </settings>
 
   <queues>
