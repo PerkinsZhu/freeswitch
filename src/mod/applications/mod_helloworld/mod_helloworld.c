@@ -45,8 +45,8 @@ void task_event_channel_hangup_complete(switch_event_t* event)
 // 处理事件监听
 static void event_handler(switch_event_t* event)
 {
-    char* event_name = switch_event_get_header_nil(event, "Event-Name");
-    switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_CONSOLE, " Event-Name: %s\n", event_name);
+    // char* event_name = switch_event_get_header_nil(event, "Event-Name");
+    // switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_CONSOLE, " Event-Name: %s\n", event_name);
 
     switch (event->event_id)
     {
@@ -76,6 +76,29 @@ SWITCH_STANDARD_APP(task_app_function)
         switch_channel_export_variable(pchannel, "task_str", "task_app export variable", SWITCH_EXPORT_VARS_VARIABLE);
     }
 }
+
+
+
+// 自定义event事件
+// 订阅事件的命令(通过 fs_cli进入 )   /event plain CUSTOM my_event_name      /events plain all
+// 取消订阅所有事件   /nixevent plain all           /nixevent all
+switch_bool_t fire_my_event(switch_core_session_t* session)
+{
+    switch_event_t* event = NULL;
+    const char* var = "my custom event";
+    // switch_channel_t *channel = switch_core_session_get_channel(session);
+
+    if (switch_event_create_subclass(&event, SWITCH_EVENT_CUSTOM, "my_event_name") == SWITCH_STATUS_SUCCESS) {
+        switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "Custom-Variable", var);
+        switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "Unique-ID", switch_core_session_get_uuid(session));
+        // switch_channel_event_set_data(channel, event);
+
+        switch_event_fire(&event);
+    }
+
+    return SWITCH_TRUE;
+}
+
 
 //执行API 方法
 SWITCH_STANDARD_API(task_api_function)
@@ -111,6 +134,7 @@ SWITCH_STANDARD_API(task_api_function)
     if (0 == strcmp("test1", argv[0]))
     {
         stream->write_function(stream, "task api test1, cmd:%s, session:%p", cmd, session);
+
     }
     else if (0 == strcmp("test2", argv[0]))
     {
@@ -122,6 +146,10 @@ SWITCH_STANDARD_API(task_api_function)
     }
 
     switch_safe_free(mycmd);
+
+    //执行api的时候 触发 event事件  task test1
+    fire_my_event(session);
+
     return SWITCH_STATUS_SUCCESS;
 }
 
