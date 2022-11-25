@@ -3,53 +3,57 @@ import freeswitch
 import datetime
 import json
 
-#Ö´ĞĞpython½Å±¾ĞèÒª°´ÕÕ mod_pythonÄ£¿é
+#æ‰§è¡Œpythonè„šæœ¬éœ€è¦æŒ‰ç…§ mod_pythonæ¨¡å—
 
 
-# Íø¹ØÃû£¬ÔÚsipprofileÖĞÅäÖÃµÄ
+# ç½‘å…³åï¼Œåœ¨sipprofileä¸­é…ç½®çš„
 default_gw = "gatewag_01/"
 slave_gw = "gatewag_02/"
 
 api = freeswitch.API()
 
-# ¶ÔºÅÂë½øĞĞÔ¤´¦Àí
+# å¯¹å·ç è¿›è¡Œé¢„å¤„ç†
 def preJobs(tenantId, number, enflag):
     payload = {}
     payload["tenantId"] = tenantId
     payload["number"] = number
     url = "http://127.0.0.1:8080/action/any content-type 'application/json' post '" +  json.dumps(payload)+"'"
     freeswitch.consoleLog("info","url:" + url)
-    response = api.execute("curl", url)  #½øĞĞcurl²Ù×÷£¬ĞèÒªÒÀÀµ mod_curl
+    response = api.execute("curl", url)  #è¿›è¡Œcurlæ“ä½œï¼Œéœ€è¦ä¾èµ– mod_curl
     freeswitch.consoleLog("info", "response:"+response)
     user_dict = eval(response)
     tempPhone = user_dict['data']
     freeswitch.consoleLog("info", "tempPhone:"+tempPhone)
     return tempPhone
 
+#æŒ‚æ–­ç”µè¯åè§¦å‘è¯¥å‡½æ•°
+def hangup_hook(session, what, args):
+    freeswitch.consoleLog("info", "==============hangup hook.args:{}".format(args))
+    return "Result"
 
 def handler(session, args):
-    # »ñÈ¡webrtc´«ÈëµÄÒ»Ğ©²ÎÊı
+    # è·å–webrtcä¼ å…¥çš„ä¸€äº›å‚æ•°
     caller = session.getVariable("caller_id_number")
     destination_number = session.getVariable("destination_number")
     callee = destination_number[0:]
     tenantId = session.getVariable("sip_h_X-tenantId")
     uniqueId = session.getVariable("sip_h_X-uniqueId")
     callback = session.getVariable("sip_h_X-callback")
-    # ÉèÖÃÍ¨µÀ±äÁ¿
+    # è®¾ç½®é€šé“å˜é‡
     session.setVariable("tenantId", tenantId)
     session.setVariable("uniqueId", uniqueId)
     
     session.setVariable("callback", callback)
     session.setVariable("calleenum", callee)
     session.setVariable("callernum", caller)
-    # Ìí¼ÓÒ»Ğ©×Ô¶¨Òå±äÁ¿
+    # æ·»åŠ ä¸€äº›è‡ªå®šä¹‰å˜é‡
     session.setVariable("callType", "2")
     session.setVariable("role", "1")
 
     freeswitch.consoleLog("info","testCall---------------------"+caller)
     
 
-    # ¶ÔºÅÂë½øĞĞÔ¤´¦Àí
+    # å¯¹å·ç è¿›è¡Œé¢„å¤„ç†
     callee = preJobs(tenantId, destination_number, enflag)
 
     
@@ -57,11 +61,15 @@ def handler(session, args):
     freeswitch.consoleLog("info","===========callee: "+callee)
     session.setVariable("calleenum", callee)
 
+    # session.setVariable("hangup_after_bridge","true")
+    #è®¾ç½®æŒ‚æ–­å›è°ƒé’©å­ï¼Œæ”¯æŒä¼ å…¥è‡ªå®šä¹‰å‚æ•°
+    session.setHangupHook(hangup_hook,"12312312")
+
 
     if session.ready():
         date = datetime.datetime.now().strftime('%Y%m%d')
         dateDetail = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-        baseDir = api.executeString("eval $${base_dir}")  #»ñÈ¡freeswitchµÄ¹¤×÷Â·¾¶
+        baseDir = api.executeString("eval $${base_dir}")  #è·å–freeswitchçš„å·¥ä½œè·¯å¾„
         recordPath = "%s/recordings/%s/%s/%s/%s_%s.wav" % (baseDir,tenantId,caller,date,dateDetail,callee)
         freeswitch.consoleLog("info","===========recordPath: "+recordPath)
         channelVariable = "ignore_sdp_ice=true,callernum=%s,calleenum=%s,tenantId=%s,uniqueId=%s,callback=%s,appId=%s,transparent_data=%s,callType=2,role=2" % (caller,callee,tenantId,uniqueId,callback,appId,transparent_data)
