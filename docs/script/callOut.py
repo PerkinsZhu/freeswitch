@@ -61,7 +61,10 @@ def handler(session, args):
     freeswitch.consoleLog("info","===========callee: "+callee)
     session.setVariable("calleenum", callee)
 
-    # session.setVariable("hangup_after_bridge","true")
+    #bridge过程中，当被叫挂断后，主机session已经存在的，此时不会触发主叫的HangupHook，如果要触发则必须主动让主机挂机
+    #方案一：当被叫挂断后，主叫也字段挂断。在主叫中设置 session.setVariable("hangup_after_bridge","true")
+    #方案二：在脚本最后直接调用session挂掉主叫： session.hangup()
+    session.setVariable("hangup_after_bridge","true")
     #设置挂断回调钩子，支持传入自定义参数
     session.setHangupHook(hangup_hook,"12312312")
 
@@ -81,3 +84,6 @@ def handler(session, args):
         session.execute("bridge", dialString)
         cause = session.getVariable("DIALSTATUS")
         freeswitch.consoleLog("info","===========cause: "+cause)
+
+    # 主叫主动挂断，当设置hangup_after_bridge则不需要再显式挂断
+    session.hangup()
