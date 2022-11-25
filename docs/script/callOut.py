@@ -31,6 +31,13 @@ def hangup_hook(session, what, args):
     freeswitch.consoleLog("info", "==============hangup hook.args:{}".format(args))
     return "Result"
 
+def getRecordPath(tenantId,caller,callee):
+    date = datetime.datetime.now().strftime('%Y%m%d')
+    dateDetail = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    baseDir = api.executeString("eval $${base_dir}")
+    recordPath = "%s/recordings/%s/%s/%s/%s_%s.wav" % (baseDir,tenantId,caller,date,dateDetail,callee)
+    return recordPath
+
 def handler(session, args):
     # 获取webrtc传入的一些参数
     caller = session.getVariable("caller_id_number")
@@ -69,11 +76,13 @@ def handler(session, args):
     session.setHangupHook(hangup_hook,"12312312")
 
 
+    # 使用 uuid_record 进行录音
+    uuid = session.getVariable("uuid")
+    cmd = "uuid_record " + uuid +" start "+ recordPath
+    freeswitch.consoleLog("info","===========cmd: "+cmd)
+
     if session.ready():
-        date = datetime.datetime.now().strftime('%Y%m%d')
-        dateDetail = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-        baseDir = api.executeString("eval $${base_dir}")  #获取freeswitch的工作路径
-        recordPath = "%s/recordings/%s/%s/%s/%s_%s.wav" % (baseDir,tenantId,caller,date,dateDetail,callee)
+        recordPath = getRecordPath(tenantId,caller,callee)
         freeswitch.consoleLog("info","===========recordPath: "+recordPath)
         channelVariable = "ignore_sdp_ice=true,callernum=%s,calleenum=%s,tenantId=%s,uniqueId=%s,callback=%s,appId=%s,transparent_data=%s,callType=2,role=2" % (caller,callee,tenantId,uniqueId,callback,appId,transparent_data)
         freeswitch.consoleLog("info","===========channelVariable: "+channelVariable)
