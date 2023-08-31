@@ -2818,7 +2818,10 @@ void event_handler(switch_event_t *event)
 
 			if ((sptr = strstr(fixed_contact_str, needle))) {
 				char *origsptr = strstr(contact_str, needle);
-				eptr = strchr(++origsptr, ';');
+
+				if (origsptr) {
+					eptr = strchr(++origsptr, ';');
+				}
 			} else {
 				sptr = strchr(fixed_contact_str, '\0') - 1;
 			}
@@ -2948,6 +2951,9 @@ void *SWITCH_THREAD_FUNC sofia_profile_worker_thread_run(switch_thread_t *thread
 	int tick = 0, x = 0;
 
 	sofia_set_pflag_locked(profile, PFLAG_WORKER_RUNNING);
+
+	/* Seed PRNG for functions within worker thread */
+	srand((unsigned)((intptr_t) switch_thread_self() + switch_micro_time_now()));
 
 	while ((mod_sofia_globals.running == 1 && sofia_test_pflag(profile, PFLAG_RUNNING))) {
 
@@ -10299,6 +10305,7 @@ void sofia_handle_sip_i_reinvite(switch_core_session_t *session,
 			}
 		}
 
+		sofia_glue_set_extra_headers(session, sip, SOFIA_SIP_HEADER_PREFIX);
 		switch_channel_execute_on(channel, "execute_on_sip_reinvite");
 	}
 
@@ -11480,6 +11487,16 @@ void sofia_handle_sip_i_invite(switch_core_session_t *session, nua_t *nua, sofia
 			}
 			if (msg_params_find(privacy->priv_values, "id")) {
 				switch_set_flag(tech_pvt->caller_profile, SWITCH_CPF_HIDE_NAME | SWITCH_CPF_HIDE_NUMBER);
+			}
+		}
+
+		if (sip->sip_identity) {
+			sip_identity_t *id;
+
+			for (id = sip->sip_identity; id; id = id->id_next) {
+				if (!zstr(id->id_value)) {
+					switch_channel_add_variable_var_check(channel, "sip_identity", id->id_value, SWITCH_FALSE, SWITCH_STACK_PUSH);
+				}
 			}
 		}
 
