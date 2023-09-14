@@ -23,6 +23,7 @@
     <RootNamespace>mod_say_es_ar</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{CEEE31E6-8A08-42C7-BEBD-5EC12072C136}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

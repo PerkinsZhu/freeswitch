@@ -11,6 +11,7 @@
     <ProjectGuid>{329A6FA0-0FCC-4435-A950-E670AEFA9838}</ProjectGuid>
     <RootNamespace>make_modem_filter</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='All|Win32'" Label="Configuration">
@@ -21,7 +22,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\w32\tiff.props" />
-    <Import Project="$(SolutionDir)\w32\spandsp.props"/>
+    <Import Project="$(SolutionDir)\w32\spandsp.props" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>

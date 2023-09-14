@@ -22,6 +22,7 @@
     <ProjectName>8khz music</ProjectName>
     <ProjectGuid>{D1ABE208-6442-4FB4-9AAD-1677E41BC870}</ProjectGuid>
     <RootNamespace>8khz music</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -55,7 +56,7 @@
     <IntDir>$(PlatformName)\$(Configuration)\$(ProjectName)\$(SoundQuality)</IntDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <Import Project="..\..\..\w32\download_sounds.props"/>
+  <Import Project="..\..\..\w32\download_sounds.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />

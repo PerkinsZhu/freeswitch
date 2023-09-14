@@ -23,6 +23,7 @@
     <RootNamespace>mod_codec2</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{CB4E68A1-8D19-4B5E-87B9-97A895E1BA17}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

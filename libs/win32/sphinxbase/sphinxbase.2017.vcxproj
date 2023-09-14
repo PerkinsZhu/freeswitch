@@ -22,6 +22,7 @@
     <ProjectName>sphinxbase</ProjectName>
     <ProjectGuid>{2F025EAD-99BD-40F5-B2CC-F0A28CAD7F2D}</ProjectGuid>
     <RootNamespace>sphinxbase</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(SolutionDir)\w32\download_sphinxbase.props" Condition=" '$(downloadsphinxbasePropsImported)' == '' " />

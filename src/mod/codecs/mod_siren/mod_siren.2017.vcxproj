@@ -23,6 +23,7 @@
     <ProjectGuid>{0B6C905B-142E-4999-B39D-92FF7951E921}</ProjectGuid>
     <RootNamespace>mod_siren</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -23,6 +23,7 @@
     <ProjectGuid>{11C9BC3D-45E9-46E3-BE84-B8CEE4685E39}</ProjectGuid>
     <RootNamespace>mod_skel</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

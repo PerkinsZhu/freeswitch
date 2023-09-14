@@ -23,6 +23,7 @@
     <ProjectGuid>{0DF3ABD0-DDC0-4265-B778-07C66780979B}</ProjectGuid>
     <RootNamespace>mod_sofia</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -22,6 +22,7 @@
     <ProjectGuid>{D3D8B329-20BE-475E-9E83-653CEA0E0EF5}</ProjectGuid>
     <RootNamespace>libshout</RootNamespace>
     <ProjectName>libshout</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -23,6 +23,7 @@
     <ProjectGuid>{3C977801-FE88-48F2-83D3-FA2EBFF6688E}</ProjectGuid>
     <RootNamespace>mod_nibblebill</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

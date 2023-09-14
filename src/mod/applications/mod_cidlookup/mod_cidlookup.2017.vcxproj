@@ -23,6 +23,7 @@
     <RootNamespace>mod_cidlookup</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{0A130A8B-3076-4619-BADF-9E86F621AEEC}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

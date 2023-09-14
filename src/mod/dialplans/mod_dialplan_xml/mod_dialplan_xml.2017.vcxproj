@@ -23,6 +23,7 @@
     <ProjectGuid>{07113B25-D3AF-4E04-BA77-4CD1171F022C}</ProjectGuid>
     <RootNamespace>mod_dialplan_xml</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

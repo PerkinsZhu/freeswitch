@@ -23,6 +23,7 @@
     <ProjectGuid>{2286DA73-9FC5-45BC-A508-85994C3317AB}</ProjectGuid>
     <RootNamespace>mod_pocketsphinx</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -38,6 +38,7 @@
     <ProjectName>pthread</ProjectName>
     <ProjectGuid>{DF018947-0FFF-4EB3-BDEE-441DC81DA7A4}</ProjectGuid>
     <RootNamespace>pthread</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(SolutionDir)\w32\download_pthreads.props" Condition=" '$(downloadpthreadsPropsImported)' == '' " />

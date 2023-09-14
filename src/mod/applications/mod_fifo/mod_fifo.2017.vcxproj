@@ -23,6 +23,7 @@
     <ProjectGuid>{75DF7F29-2FBF-47F7-B5AF-5B4952DC1ABD}</ProjectGuid>
     <RootNamespace>mod_fifo</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

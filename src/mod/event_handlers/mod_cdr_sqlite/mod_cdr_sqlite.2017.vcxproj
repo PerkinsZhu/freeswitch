@@ -23,6 +23,7 @@
     <RootNamespace>mod_cdr_sqlite</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{2CA661A7-01DD-4532-BF88-B6629DFB544A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

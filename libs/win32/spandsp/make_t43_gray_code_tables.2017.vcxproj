@@ -11,6 +11,7 @@
     <ProjectGuid>{EDDB8AB9-C53E-44C0-A620-0E86C2CBD5D5}</ProjectGuid>
     <RootNamespace>make_t43_gray_code_tables</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='All|Win32'" Label="Configuration">
@@ -21,7 +22,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="PropertySheets">
     <Import Project="$(SolutionDir)\w32\tiff.props" />
-    <Import Project="$(SolutionDir)\w32\spandsp.props"/>
+    <Import Project="$(SolutionDir)\w32\spandsp.props" />
   </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>

@@ -23,6 +23,7 @@
     <ProjectGuid>{6FF941AC-82C5-429F-AA4C-AD2FB9E5DA52}</ProjectGuid>
     <RootNamespace>mod_tone_stream</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -23,6 +23,7 @@
     <ProjectGuid>{9B9D2551-D6BD-4F20-8BE5-DE30E154A064}</ProjectGuid>
     <RootNamespace>mod_v8</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

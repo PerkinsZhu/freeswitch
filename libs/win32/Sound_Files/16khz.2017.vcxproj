@@ -22,6 +22,7 @@
     <ProjectName>16khz</ProjectName>
     <ProjectGuid>{7EB71250-F002-4ED8-92CA-CA218114537A}</ProjectGuid>
     <RootNamespace>My16khz</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -55,7 +56,7 @@
     <IntDir>$(PlatformName)\$(Configuration)\$(ProjectName)\$(SoundQuality)</IntDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <Import Project="..\..\..\w32\download_sounds.props"/>
+  <Import Project="..\..\..\w32\download_sounds.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />

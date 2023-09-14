@@ -31,6 +31,7 @@
     <RootNamespace>mod_av</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{7AEE504B-23B6-4B05-829E-7CD34855F146}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-x264|Win32'" Label="Configuration">

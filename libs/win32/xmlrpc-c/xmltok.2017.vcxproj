@@ -22,6 +22,7 @@
     <ProjectName>xmltok</ProjectName>
     <ProjectGuid>{B535402E-38D2-4D54-8360-423ACBD17192}</ProjectGuid>
     <RootNamespace>xmltok</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -23,6 +23,7 @@
     <RootNamespace>mod_odbc_cdr</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{096C9A84-55B2-4F9B-97E5-0FDF116FD25F}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

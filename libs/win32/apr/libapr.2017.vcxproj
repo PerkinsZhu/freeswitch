@@ -22,6 +22,7 @@
     <ProjectName>libapr</ProjectName>
     <ProjectGuid>{F6C55D93-B927-4483-BB69-15AEF3DD2DFF}</ProjectGuid>
     <RootNamespace>libapr</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

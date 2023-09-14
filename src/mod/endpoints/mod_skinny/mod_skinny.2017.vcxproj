@@ -23,6 +23,7 @@
     <ProjectGuid>{CC1DD008-9406-448D-A0AD-33C3186CFADB}</ProjectGuid>
     <RootNamespace>mod_skinny</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

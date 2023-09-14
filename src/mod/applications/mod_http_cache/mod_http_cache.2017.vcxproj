@@ -23,6 +23,7 @@
     <RootNamespace>mod_http_cache</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{87933C2D-0159-46F7-B326-E1B6E982C21E}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

@@ -22,6 +22,7 @@
     <ProjectName>xmlparse</ProjectName>
     <ProjectGuid>{0D108721-EAE8-4BAF-8102-D8960EC93647}</ProjectGuid>
     <RootNamespace>xmlparse</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

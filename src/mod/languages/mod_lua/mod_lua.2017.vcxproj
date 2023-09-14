@@ -23,6 +23,7 @@
     <ProjectGuid>{7B077E7F-1BE7-4291-AB86-55E527B25CAC}</ProjectGuid>
     <RootNamespace>mod_lua</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(SolutionDir)w32\lua.props" />

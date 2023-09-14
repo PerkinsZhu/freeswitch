@@ -23,6 +23,7 @@
     <RootNamespace>mod_pgsql</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{1BA65811-5453-46F6-8190-9ECEEFEB7DF2}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

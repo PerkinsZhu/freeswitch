@@ -22,6 +22,7 @@
     <ProjectName>libsofia_sip_ua_static</ProjectName>
     <ProjectGuid>{70A49BC2-7500-41D0-B75D-EDCC5BE987A0}</ProjectGuid>
     <RootNamespace>libsofia_sip_ua_static</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
