@@ -1,4 +1,6 @@
-#include "mod_helloworld.h"
+ï»¿#include "mod_helloworld.h"
+
+#include <switch.h>
 
 
 
@@ -6,43 +8,42 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_helloworld_load);
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_helloworld_shutdown);
 SWITCH_MODULE_RUNTIME_FUNCTION(mod_helloworld_runtime);
 
-SWITCH_MODULE_DEFINITION(mod_helloworld, mod_helloworld_load, mod_helloworld_shutdown, mod_helloworld_runtime);
+static const char modname[] = "mod_helloworld";
 
-
-// ¼ÓÔØÅäÖÃÎÄ¼ş¿ªÊ¼
+// åŠ è½½é…ç½®æ–‡ä»¶å¼€å§‹
 static struct
 {
-    char* hostname;      /* Êı¾İ¿â·şÎñÆ÷µØÖ· */
-    char* dbname;      /* Êı¾İ¿âÊµÀıÃû */
-    int			port;      /* Êı¾İ¿â¶Ë¿Ú */
-    char* user;      /* Êı¾İ¿âÓÃ»§ */
-    char* password;      /* Êı¾İ¿âÃÜÂë */
+    char* hostname;      /* æ•°æ®åº“æœåŠ¡å™¨åœ°å€ */
+    char* dbname;      /* æ•°æ®åº“å®ä¾‹å */
+    int			port;      /* æ•°æ®åº“ç«¯å£ */
+    char* user;      /* æ•°æ®åº“ç”¨æˆ· */
+    char* password;      /* æ•°æ®åº“å¯†ç  */
 } db_globals_t;
 
 
 
 static switch_xml_config_item_t instructions[] = {
     /* parameter name        type                 reloadable   pointer                         default value     options structure */
-    SWITCH_CONFIG_ITEM_STRING_STRDUP("db-hostname", CONFIG_RELOAD, &db_globals_t.hostname, NULL, "localhost", "Hostname for db server"), /* ×Ö·û´®ÓÃÕâ¸ö */
+    SWITCH_CONFIG_ITEM_STRING_STRDUP("db-hostname", CONFIG_RELOAD, &db_globals_t.hostname, NULL, "localhost", "Hostname for db server"), /* å­—ç¬¦ä¸²ç”¨è¿™ä¸ª */
     SWITCH_CONFIG_ITEM_STRING_STRDUP("db-name", CONFIG_RELOAD, &db_globals_t.dbname, NULL, "xcroute", "dbname for db server"),
     SWITCH_CONFIG_ITEM_STRING_STRDUP("db-user", CONFIG_RELOAD, &db_globals_t.user, NULL, "postgres", "user for db server"),
     SWITCH_CONFIG_ITEM_STRING_STRDUP("db-password", CONFIG_RELOAD, &db_globals_t.password, NULL, "abc123", "password for db server"),
-    SWITCH_CONFIG_ITEM("db-port", SWITCH_CONFIG_INT, CONFIG_RELOADABLE, &db_globals_t.port, (void*)5432, NULL,NULL, NULL), /* Êı×ÖÓÃÕâ¸ö */
+    SWITCH_CONFIG_ITEM("db-port", SWITCH_CONFIG_INT, CONFIG_RELOADABLE, &db_globals_t.port, (void*)5432, NULL,NULL, NULL), /* æ•°å­—ç”¨è¿™ä¸ª */
     SWITCH_CONFIG_ITEM_END()
 };
-// ¼ÓÔØÅäÖÃÎÄ¼ş½áÊø
+// åŠ è½½é…ç½®æ–‡ä»¶ç»“æŸ
 
-//¹Ò»úÊÂ¼ş 
+//æŒ‚æœºäº‹ä»¶ 
 void task_event_channel_hangup_complete(switch_event_t* event)
 {
     const char* uuid = switch_event_get_header(event, "Unique-ID");
     const char* call_dir = switch_event_get_header(event, "Call-Direction");
-    const char* task_str = switch_event_get_header(event, "variable_task_str"); //»ñÈ¡ÔÚtask_app_functionÖĞÉèÖÃµÄ task_strÍ¨µÀ±äÁ¿
+    const char* task_str = switch_event_get_header(event, "variable_task_str"); //è·å–åœ¨task_app_functionä¸­è®¾ç½®çš„ task_stré€šé“å˜é‡
 
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "task_event_channel_hangup_complete, uuid=%s, call_dir=%s, task_str=%s\n", uuid, call_dir, task_str);
 }
 
-// ´¦ÀíÊÂ¼ş¼àÌı
+// å¤„ç†äº‹ä»¶ç›‘å¬
 static void event_handler(switch_event_t* event)
 {
     // char* event_name = switch_event_get_header_nil(event, "Event-Name");
@@ -60,7 +61,7 @@ static void event_handler(switch_event_t* event)
 }
 
 
-//Ö´ĞĞAPPÊÂ¼ş£¬¸ÃAPPĞèÒªÔÚ diaplanÖĞ Í¨¹ıaction ±êÇ©´¥·¢
+//æ‰§è¡ŒAPPäº‹ä»¶ï¼Œè¯¥APPéœ€è¦åœ¨ diaplanä¸­ é€šè¿‡action æ ‡ç­¾è§¦å‘
 SWITCH_STANDARD_APP(task_app_function)
 {
     switch_channel_t* pchannel = NULL;
@@ -72,16 +73,16 @@ SWITCH_STANDARD_APP(task_app_function)
     pchannel = switch_core_session_get_channel(session);
     if (NULL != pchannel)
     {
-        //ÉèÖÃÁËÒ»¸öÍ¨µÀ±äÁ¿ task_str
+        //è®¾ç½®äº†ä¸€ä¸ªé€šé“å˜é‡ task_str
         switch_channel_export_variable(pchannel, "task_str", "task_app export variable", SWITCH_EXPORT_VARS_VARIABLE);
     }
 }
 
 
 
-// ×Ô¶¨ÒåeventÊÂ¼ş
-// ¶©ÔÄÊÂ¼şµÄÃüÁî(Í¨¹ı fs_cli½øÈë )   /event plain CUSTOM my_event_name      /events plain all
-// È¡Ïû¶©ÔÄËùÓĞÊÂ¼ş   /nixevent plain all           /nixevent all
+// è‡ªå®šä¹‰eventäº‹ä»¶
+// è®¢é˜…äº‹ä»¶çš„å‘½ä»¤(é€šè¿‡ fs_cliè¿›å…¥ )   /event plain CUSTOM my_event_name      /events plain all
+// å–æ¶ˆè®¢é˜…æ‰€æœ‰äº‹ä»¶   /nixevent plain all           /nixevent all
 switch_bool_t fire_my_event(switch_core_session_t* session)
 {
     switch_event_t* event = NULL;
@@ -100,7 +101,7 @@ switch_bool_t fire_my_event(switch_core_session_t* session)
 }
 
 
-//Ö´ĞĞAPI ·½·¨
+//æ‰§è¡ŒAPI æ–¹æ³•
 SWITCH_STANDARD_API(task_api_function)
 {
     //SWITCH_STANDARD_API have three args:(cmd, session, stream)
@@ -128,7 +129,7 @@ SWITCH_STANDARD_API(task_api_function)
     }
 
     //parse cmd, brach process
-    // ÃüÁî  Ñ¡Ïî  ²ÎÊı
+    // å‘½ä»¤  é€‰é¡¹  å‚æ•°
     // task test1 123
     // task test2 456
     if (0 == strcmp("test1", argv[0]))
@@ -147,7 +148,7 @@ SWITCH_STANDARD_API(task_api_function)
 
     switch_safe_free(mycmd);
 
-    //Ö´ĞĞapiµÄÊ±ºò ´¥·¢ eventÊÂ¼ş  task test1
+    //æ‰§è¡Œapiçš„æ—¶å€™ è§¦å‘ eventäº‹ä»¶  task test1
     fire_my_event(session);
 
     return SWITCH_STATUS_SUCCESS;
@@ -171,15 +172,15 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_helloworld_load)
 
 
 
-    //loadÄ£¿éÀïĞ´ÏÂ
-    //×¢ÒâÕâÀïµÄ helloworld.conf ÒªºÍ xmlÎÄ¼şÀïÃæµÄ <configuration name="helloworld.conf"/> ±£³ÖÒ»ÖÂ
+    //loadæ¨¡å—é‡Œå†™ä¸‹
+    //æ³¨æ„è¿™é‡Œçš„ helloworld.conf è¦å’Œ xmlæ–‡ä»¶é‡Œé¢çš„ <configuration name="helloworld.conf"/> ä¿æŒä¸€è‡´
     res = switch_xml_config_parse_module_settings("helloworld.conf", SWITCH_FALSE, instructions);
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "res %d !\n", res);
     if (res != SWITCH_STATUS_SUCCESS) {
         switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "load configure failed!\n");
         return SWITCH_STATUS_FALSE;
     }
-    //Êä³ö¼ÓÔØµÄ ÅäÖÃÎÄ¼ş²ÎÊı
+    //è¾“å‡ºåŠ è½½çš„ é…ç½®æ–‡ä»¶å‚æ•°
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "hostname: %s \nport: %d", db_globals_t.hostname, db_globals_t.port);
 
 
@@ -187,14 +188,14 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_helloworld_load)
     *module_interface = switch_loadable_module_create_module_interface(pool, modname);
 
     // register API
-      // µÚÒ»¸ö²ÎÊıÊÇÒ»¸öAPIÖ¸Õë¡£
-      // µÚ¶ş¸ö²ÎÊıÊÇÄãµÄÃüÁîÃû³Æ ÔÚÃüÁîĞĞÖ´ĞĞµÄÃüÁî 
-      // µÚÈı¸ö²ÎÊıÊÇÄãµÄÃüÁî½éÉÜ¡£
-      // µÚËÄ¸ö²ÎÊıÊÇÄãµÄ¶ÔÓ¦µÄÃüÁî´¦Àíº¯Êı¡£
-      // µÚÎå¸ö²ÎÊıÊÇÄãµÄÃüÁî²ÎÊıÃèÊö×Ö·û´®¡£
+      // ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯ä¸€ä¸ªAPIæŒ‡é’ˆã€‚
+      // ç¬¬äºŒä¸ªå‚æ•°æ˜¯ä½ çš„å‘½ä»¤åç§° åœ¨å‘½ä»¤è¡Œæ‰§è¡Œçš„å‘½ä»¤ 
+      // ç¬¬ä¸‰ä¸ªå‚æ•°æ˜¯ä½ çš„å‘½ä»¤ä»‹ç»ã€‚
+      // ç¬¬å››ä¸ªå‚æ•°æ˜¯ä½ çš„å¯¹åº”çš„å‘½ä»¤å¤„ç†å‡½æ•°ã€‚
+      // ç¬¬äº”ä¸ªå‚æ•°æ˜¯ä½ çš„å‘½ä»¤å‚æ•°æè¿°å­—ç¬¦ä¸²ã€‚
     SWITCH_ADD_API(api_interface, "task", "task api.eg: task test1 123", task_api_function, "<cmd><args>");
 
-    //×¢²áÖÕ¶ËÃüÁî×Ô¶¯²¹È«
+    //æ³¨å†Œç»ˆç«¯å‘½ä»¤è‡ªåŠ¨è¡¥å…¨
     switch_console_set_complete("add tasktest1 [args]");
     switch_console_set_complete("add tasktest2 [args]");
 
@@ -209,7 +210,7 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_helloworld_load)
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_helloworld_shutdown)
 {
 
-    switch_event_unbind_callback(event_handler);//½â°ó¼àÌıÊÂ¼ş  
+    switch_event_unbind_callback(event_handler);//è§£ç»‘ç›‘å¬äº‹ä»¶  
     switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_CONSOLE, "\n mod_helloworld_shutdown:\n--------------------------------\n");
     return SWITCH_STATUS_SUCCESS;
 
