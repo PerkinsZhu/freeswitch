@@ -1,4 +1,4 @@
-#include "mod_helloworld.h"
+﻿//#include "mod_helloworld.h"
 #include <switch.h>
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_helloworld_load);

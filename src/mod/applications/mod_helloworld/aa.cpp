@@ -1,11 +1,12 @@
-#include "mod_helloworld.h"
+﻿//#include "mod_helloworld.h"
 #include <switch.h>
 
 SWITCH_MODULE_LOAD_FUNCTION(mod_helloworld_load);
 SWITCH_MODULE_SHUTDOWN_FUNCTION(mod_helloworld_shutdown);
-SWITCH_MODULE_RUNTIME_FUNCTION(mod_helloworld_runtime);
+// SWITCH_MODULE_RUNTIME_FUNCTION(mod_helloworld_runtime);
 
-SWITCH_MODULE_DEFINITION(mod_helloworld, mod_helloworld_load, mod_helloworld_shutdown, mod_helloworld_runtime);
+SWITCH_MODULE_DEFINITION(mod_helloworld, mod_helloworld_load, mod_helloworld_shutdown, NULL);
+SWITCH_MODULE_DEFINITION(mod_helloworld, mod_helloworld_load, mod_helloworld_shutdown, NULL);
 
 // 加载配置文件开始
 static struct {
