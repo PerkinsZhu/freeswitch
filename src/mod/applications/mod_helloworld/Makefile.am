@@ -1,4 +1,4 @@
-include $(top_srcdir)/build/modmake.rulesam
+﻿include $(top_srcdir)/build/modmake.rulesam
 MODNAME=mod_helloworld
 
 mod_LTLIBRARIES = mod_helloworld.la
