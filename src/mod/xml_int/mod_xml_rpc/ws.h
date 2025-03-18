@@ -1,4 +1,4 @@
-#ifndef _WS_H
+﻿#ifndef _WS_H
 #define _WS_H
 
 //#define WSS_STANDALONE 1

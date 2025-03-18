@@ -1,4 +1,4 @@
-<configuration name="modules.conf" description="Modules">
+﻿<configuration name="modules.conf" description="Modules">
   <modules>
 
     <!-- Loggers (I'd load these first) -->
@@ -36,6 +36,9 @@
     <load module="mod_native_file"/>
 
     <!-- Third party modules -->
-
+	  
+	 <load module="mod_helloworld"/>
+	 <load module="mod_test_a"/>
+	  
   </modules>
 </configuration>

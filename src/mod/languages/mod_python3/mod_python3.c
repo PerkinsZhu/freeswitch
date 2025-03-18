@@ -1,4 +1,4 @@
-/*
+﻿/*
  * FreeSWITCH Modular Media Switching Software Library / Soft-Switch Application
  * Copyright (C) 2005-2014, Anthony Minessale II <anthm@freeswitch.org>
  *
@@ -264,6 +264,7 @@ static void eval_some_python(const char *funcname, char *args, switch_core_sessi
 		}
 	}
 
+
 	// import the module
 	module_o = PyImport_ImportModule((char *) script);
 	if (!module_o) {
@@ -396,6 +397,7 @@ static switch_xml_t python_fetch(const char *section,
 			} else if (!(xml = switch_xml_parse_str((char *) str, strlen(str)))) {
 				switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "Error Parsing XML Result!\n");
 			}
+
 			switch_safe_free(str);
 		}
 
@@ -516,7 +518,7 @@ static void *SWITCH_THREAD_FUNC py_thread_run(switch_thread_t *thread, void *obj
 SWITCH_STANDARD_API(api_python)
 {
 
-	eval_some_python("fsapi", (char *) cmd, session, stream, NULL, NULL, NULL);
+	 eval_some_python("fsapi", (char *) cmd, session, stream, NULL, NULL, NULL);
 
 	return SWITCH_STATUS_SUCCESS;
 }
@@ -576,11 +578,12 @@ SWITCH_MODULE_LOAD_FUNCTION(mod_python3_load)
 
 	if (pp) {
 		char *path = switch_mprintf("%s:%s", pp, SWITCH_GLOBAL_dirs.script_dir);
-		setenv("PYTHONPATH", path, 1);
+		SetEnvironmentVariableA("PYTHONPATH", path, 1);
 		free(path);
 	} else {
-		setenv("PYTHONPATH", SWITCH_GLOBAL_dirs.script_dir, 1);
+		SetEnvironmentVariableA("PYTHONPATH", SWITCH_GLOBAL_dirs.script_dir, 1);
 	}
+	// _putenv("PYTHONPATH=D:\\myproject\\pythonProject\\freeswitch_script");
 
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_NOTICE, "Python Framework Loading...\n");
 

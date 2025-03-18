@@ -1,4 +1,4 @@
-SWITCH_BEGIN_EXTERN_C PyObject * mod_python_conjure_event(switch_event_t *event)
+﻿SWITCH_BEGIN_EXTERN_C PyObject * mod_python_conjure_event(switch_event_t *event)
 {
 	PyObject *obj;
 	Event *result = new Event(event, 0);
