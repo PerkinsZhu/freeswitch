@@ -14,29 +14,7 @@ std::string encode_util::to_base64(std::vector<uint8_t> pcm_buffer)
 
 
 
-// 将 unsigned char* 数据转换为 Base64 字符串
-std::string encode_util::encode_base64(const unsigned char *opus_data, size_t data_size)
-{
-	if (opus_data == nullptr || data_size == 0) { throw std::invalid_argument("Invalid input data"); }
 
-	// 计算 Base64 编码后的长度（包含填充）
-	const size_t encoded_size = boost::beast::detail::base64::encoded_size(data_size);
-
-	// 创建足够大的缓冲区存储结果
-	std::string base64_str;
-	base64_str.resize(encoded_size);
-
-	// 执行编码
-	const size_t actual_size = boost::beast::detail::base64::encode(&base64_str[0], // 输出缓冲区
-																	opus_data, // 输入数据（自动转换为 const void*）
-																	data_size // 输入数据大小
-	);
-
-	// 调整字符串长度以匹配实际编码后的数据
-	base64_str.resize(actual_size);
-
-	return base64_str;
-}
 
 
 
@@ -118,5 +96,45 @@ std::string encode_util::base64_encode(const std::vector<uint8_t> &input, bool w
 		throw std::runtime_error("Base64 decode error: " + std::string(e.what()));
 	}
 }
+
+
+ 
+// Base64 编码函数
+std::string encode_util::base64_encode_v2(const unsigned char *data, size_t length)
+{
+	const char base64_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	std::string encoded;
+	int i = 0, j = 0;
+	unsigned char array_3[3], array_4[4];
+
+	while (length--) {
+		array_3[i++] = *(data++);
+		if (i == 3) {
+			array_4[0] = (array_3[0] & 0xfc) >> 2;
+			array_4[1] = ((array_3[0] & 0x03) << 4) + ((array_3[1] & 0xf0) >> 4);
+			array_4[2] = ((array_3[1] & 0x0f) << 2) + ((array_3[2] & 0xc0) >> 6);
+			array_4[3] = array_3[2] & 0x3f;
+
+			for (i = 0; i < 4; i++) { encoded += base64_chars[array_4[i]]; }
+			i = 0;
+		}
+	}
+
+	if (i) {
+		for (j = i; j < 3; j++) array_3[j] = '\0';
+
+		array_4[0] = (array_3[0] & 0xfc) >> 2;
+		array_4[1] = ((array_3[0] & 0x03) << 4) + ((array_3[1] & 0xf0) >> 4);
+		array_4[2] = ((array_3[1] & 0x0f) << 2) + ((array_3[2] & 0xc0) >> 6);
+
+		for (j = 0; j < i + 1; j++) { encoded += base64_chars[array_4[j]]; }
+
+		while (i++ < 3) { encoded += '='; }
+	}
+
+	return encoded;
+}
+
+
 
 

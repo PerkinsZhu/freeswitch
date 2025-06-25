@@ -49,8 +49,16 @@ struct SessionData {
 	SessionData()
 	{
 		try {
+			ssl::context ctx(ssl::context::tlsv12_client);
+
+			// 配置 SSL 上下文（禁用证书验证，仅用于测试）
+			ctx.set_verify_mode(ssl::verify_none);
+			ctx.set_default_verify_paths();		   // 加载系统默认证书路径
+			ctx.set_verify_mode(ssl::verify_none); // 测试时禁用证书验证
+			// ctx.set_verify_mode(ssl::verify_peer); // 生产环境启用证书验证
+
 			// 创建 WebSocket 客户端
-			webSocketClient = std::make_shared<WebSocketClient2>("127.0.0.1", "8887");
+			webSocketClient = std::make_shared<WebSocketClient2>("tts.cloud.tencent.com", "443",ctx);
 
 		} catch (const std::exception &e) {
 			switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_ERROR, "WebSocket 连接失败: %s\n", e.what());
@@ -109,8 +117,12 @@ void free_audio_buffer(AudioBuffer &buffer)
 
 static void on_message(std::string response, SessionData *session_data)
 {
-
-	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "websocket RECEIVE : %s \n", response.c_str());
+	if (response.empty()) {
+		
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "无效message  \n");
+		return;
+	}
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "websocket RECEIVE : %s \n", response.c_str());
 
 	string audio = getResponseAudio(response);
 	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "websocket audio : %s \n", audio.c_str());
